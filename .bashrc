@@ -1,0 +1,7 @@
+alias ls="ls -G"
+alias diff="colordiff"
+alias gcc="ccache gcc -std=c99"
+alias clang="ccache clang"
+alias g++="ccache g++"
+alias clang++="ccache clang++"
+alias vi="nvim"
