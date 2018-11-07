@@ -2,6 +2,8 @@ if [ -f ~/.bashrc ]; then
   . ~/.bashrc
 fi
 
+export EDITOR=/usr/local/bin/nvim
+
 #Emacs
 export PATH=/usr/local/cellar/emacs-mac/emacs-26.1-z-mac-7.1/bin:$PATH
 
