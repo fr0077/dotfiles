@@ -1,6 +1,8 @@
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\""
 endif
+"autocmd vimenter * NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 call plug#begin()
 Plug 'autozimu/LanguageClient-neovim', {
@@ -14,6 +16,8 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neoinclude.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 call plug#end()
 
 let g:LanguageClient_autoStart = 1
@@ -68,11 +72,15 @@ inoremap <silent> jj <ESC>
 nnoremap <silent> <CR> i<CR><ESC>
 nnoremap <silent> <Backspace> i<Backspace><right><Esc>
 nnoremap <silent> <Space> i<Space><right><ESC>
-nnoremap <C-]> :call LanguageClient_textDocument_formatting()<CR>
-nnoremap <silent> <C-p> <Plug>AirlineSelectPrevTab
-nnoremap <silent> <C-n> <Plug>AirlineSelectNextTab
+nnoremap <C-f> :call LanguageClient_textDocument_formatting()<CR>
 nnoremap ; :
 nnoremap : ;
+nmap <silent> tp <Plug>AirlineSelectPrevTab
+nmap <silent> tn <Plug>AirlineSelectNextTab
+nnoremap <silent> td :bd<CR>
+nnoremap <silent> <C-q> :NERDTreeToggle<CR>
+nnoremap <silent> wh <C-w>h
+nnoremap <silent> wl <C-w>l
 
 let g:airline_left_sep=''
 let g:airline_right_sep=''
