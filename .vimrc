@@ -20,6 +20,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 call plug#end()
 
+source ~/Documents/Programming/vim/ccj.vim
+
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
   \ 'c': ['clangd'],
@@ -72,7 +74,7 @@ inoremap <silent> jj <ESC>
 nnoremap <silent> <CR> i<CR><ESC>
 nnoremap <silent> <Backspace> i<Backspace><right><Esc>
 nnoremap <silent> <Space> i<Space><right><ESC>
-nnoremap <C-f> :call LanguageClient_textDocument_formatting()<CR>
+noremap <C-]> :call LanguageClient_textDocument_formatting()<CR>
 nnoremap ; :
 nnoremap : ;
 nmap <silent> tp <Plug>AirlineSelectPrevTab
