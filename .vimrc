@@ -1,8 +1,14 @@
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\""
 endif
-"autocmd vimenter * NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd VimEnter * call echodoc#enable()
+autocmd BufEnter * silent! if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd BufEnter * silent! lcd %:p:h
+augroup LanguageClient_config
+  autocmd!
+  autocmd User LanguageClientStarted setlocal signcolumn=yes
+  autocmd User LanguageClientStopped setlocal signcolumn=auto
+augroup END
 
 call plug#begin()
 Plug 'autozimu/LanguageClient-neovim', {
@@ -14,14 +20,17 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neoinclude.vim'
+Plug 'Shougo/echodoc.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 source ~/Documents/Programming/vim/ccj.vim
 
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
   \ 'c': ['clangd'],
@@ -54,12 +63,6 @@ let g:LanguageClient_diagnosticsDisplay = {
   \ },
 \ }
 
-augroup LanguageClient_config
-  autocmd!
-  autocmd User LanguageClientStarted setlocal signcolumn=yes
-  autocmd User LanguageClientStopped setlocal signcolumn=auto
-augroup END
-
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_delay = 0
 let g:deoplete#auto_complete_start_length = 1
@@ -70,26 +73,36 @@ let g:deoplete#file#enable_buffer_path = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
-inoremap <silent> jj <ESC>
 nnoremap <silent> <CR> i<CR><ESC>
 nnoremap <silent> <Backspace> i<Backspace><right><Esc>
 nnoremap <silent> <Space> i<Space><right><ESC>
 noremap <C-]> :call LanguageClient_textDocument_formatting()<CR>
 nnoremap ; :
 nnoremap : ;
-nmap <silent> tp <Plug>AirlineSelectPrevTab
-nmap <silent> tn <Plug>AirlineSelectNextTab
+nmap tp <Plug>AirlineSelectPrevTab
+nmap tn <Plug>AirlineSelectNextTab
 nnoremap <silent> td :bd<CR>
-nnoremap <silent> <C-q> :NERDTreeToggle<CR>
+nnoremap  <C-o> :NERDTreeToggle<cr>
 nnoremap <silent> wh <C-w>h
 nnoremap <silent> wl <C-w>l
+nnoremap  cn :call LanguageClient#textDocument_rename()<CR>
+nnoremap <A-p> :pu<CR>
+nnoremap j gj
+nnoremap k gk
+nnoremap gd :call LanguageClient_textDocument_definition()<CR>
+inoremap <silent> jj <ESC>
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-s> <Plug>(neosnippet_expand_or_jump)
+smap <C-s> <Plug>(neosnippet_expand_or_jump)
+xmap <C-s> <Plug>(neosnippet_expand_or_jump)
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 
-let g:airline_left_sep=''
-let g:airline_right_sep=''
+
 set spell
 set number
 set autoindent
-set tabstop=2
+set tabstop=4
 set shiftwidth=2
 set smartindent
 set title
@@ -121,4 +134,6 @@ highlight SignColumn ctermbg=none
 highlight ALEErrorSign ctermfg=darkred
 highlight ALEWarningSign ctermfg=yellow
 highlight ALEInfoSign ctermfg=blue
+highlight Pmenu ctermbg=darkgray ctermfg=white
+highlight PmenuSel ctermbg=green
 
