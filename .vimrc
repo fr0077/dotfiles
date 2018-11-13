@@ -3,6 +3,7 @@ if has("autocmd")
 endif
 autocmd BufEnter * silent! if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 autocmd BufEnter * silent! lcd %:p:h
+autocmd FileType help nnoremap <buffer> q <C-w>c
 augroup LanguageClient_config
   autocmd!
   autocmd User LanguageClientStarted setlocal signcolumn=yes
@@ -26,7 +27,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
-source ~/Documents/Programming/vim/ccj.vim
+source ~/Documents/Programming/Library/fujii/vim/commands.vim
 
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:LanguageClient_autoStart = 1
@@ -71,14 +72,14 @@ let g:deoplete#file#enable_buffer_path = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
-nnoremap <silent> <CR> i<CR><ESC>
-nnoremap <silent> <Backspace> i<Backspace><right><Esc>
 nnoremap <silent> <Space> i<Space><right><ESC>
+nnoremap <silent> <Tab> i<Tab><right><ESC>
 noremap <C-]> :call LanguageClient_textDocument_formatting()<CR>
 nnoremap ; :
 nnoremap : ;
 nmap tp <Plug>AirlineSelectPrevTab
 nmap tn <Plug>AirlineSelectNextTab
+nnoremap <silent> <Esc><Esc> :noh<CR>
 nnoremap <silent> td :bd<CR>
 nnoremap  <C-o> :NERDTreeToggle<cr>
 nnoremap <silent> wh <C-w>h
@@ -96,8 +97,11 @@ xmap <C-s> <Plug>(neosnippet_expand_or_jump)
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 
-
-set spell
+set hidden
+set ignorecase
+set smartcase
+set clipboard=unnamed
+set wrapscan
 set number
 set autoindent
 set tabstop=4
@@ -105,14 +109,23 @@ set shiftwidth=2
 set smartindent
 set title
 set list
-set whichwrap=b,s,[,],<,>
-set virtualedit=block
+set whichwrap=h,l,<,>,[,],b
+set virtualedit=block,onemore
 set backspace=indent,eol,start
 set expandtab
+set wildmenu
+set wildmode=longest,full
 set listchars=tab:→-,trail:-,extends:»,precedes:«,nbsp:@
 set cursorline
+set cursorcolumn
 set visualbell t_vb=
 set noerrorbells
+set backup
+set undofile
+set swapfile
+set backupdir=~/.vim/backup//
+set undodir=~/.vim/undo//
+set directory=~/.vim/swp//
 set incsearch
 set autoread
 set scrolloff=5
@@ -120,13 +133,16 @@ set ambiwidth=single
 
 syntax on
 
+highlight MatchParen ctermfg=white ctermbg=brown
 highlight SpellBad ctermfg=red cterm=underline ctermbg=none
 highlight SpecialKey ctermfg=darkgray
 highlight NonText ctermfg=darkgray
-highlight CursorLine cterm=none ctermfg=none ctermbg=none
-highlight Cursor cterm=none ctermfg=none ctermbg=green
+highlight CursorLine cterm=none ctermfg=none ctermbg=black
+highlight CursorColumn cterm=none ctermfg=none ctermbg=black
+highlight Cursor cterm=none ctermfg=white ctermbg=green
 highlight CursorLineNr cterm=none ctermfg=green ctermbg=none
 highlight LineNr ctermfg=darkgray ctermbg=none
+highlight Search cterm=none ctermfg=black ctermbg=yellow
 highlight EndOfBuffer ctermbg=none ctermfg=darkgray
 highlight SignColumn ctermbg=none
 highlight ALEErrorSign ctermfg=darkred

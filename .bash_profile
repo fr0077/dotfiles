@@ -2,6 +2,10 @@ if [ -f ~/.bashrc ]; then
   . ~/.bashrc
 fi
 
+#Fujii
+export PATH=~/Documents/Programming/Library/fujii/shell:$PATH
+
+#NeoVim
 export EDITOR=/usr/local/bin/nvim
 
 #Emacs
