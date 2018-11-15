@@ -25,10 +25,15 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
+Plug 'cohama/lexima.vim'
+Plug 'scrooloose/nerdcommenter'
 call plug#end()
 
 source ~/Documents/Programming/Library/fujii/vim/commands.vim
 
+let mapleader=";"
+let g:NERDDefaultAlign='left'
+let g:neoinclude#paths = {'cpp': '/usr/local/Cellar/boost/1.68.0/include'}
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
@@ -72,13 +77,11 @@ let g:deoplete#file#enable_buffer_path = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
-nnoremap <silent> <Space> i<Space><right><ESC>
-nnoremap <silent> <Tab> i<Tab><right><ESC>
-noremap <C-]> :call LanguageClient_textDocument_formatting()<CR>
+nnoremap <C-]> :call LanguageClient_textDocument_formatting()<CR>
 nnoremap ; :
 nnoremap : ;
-nmap tp <Plug>AirlineSelectPrevTab
-nmap tn <Plug>AirlineSelectNextTab
+nnoremap tp <Plug>AirlineSelectPrevTab
+nnoremap tn <Plug>AirlineSelectNextTab
 nnoremap <silent> <Esc><Esc> :noh<CR>
 nnoremap <silent> td :bd<CR>
 nnoremap  <C-o> :NERDTreeToggle<cr>
@@ -89,8 +92,9 @@ nnoremap <A-p> :pu<CR>
 nnoremap j gj
 nnoremap k gk
 nnoremap gd :call LanguageClient_textDocument_definition()<CR>
+vnoremap c <nop>
 inoremap <silent> jj <ESC>
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+"Note: It must be "imap" and "smap".  It uses <Plug> mappings.
 imap <C-s> <Plug>(neosnippet_expand_or_jump)
 smap <C-s> <Plug>(neosnippet_expand_or_jump)
 xmap <C-s> <Plug>(neosnippet_expand_or_jump)
