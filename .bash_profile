@@ -2,6 +2,9 @@ if [ -f ~/.bashrc ]; then
   . ~/.bashrc
 fi
 
+#boost
+export BOOST=/usr/local/Cellar/boost/1.68.0/include
+
 #Fujii
 export PATH=~/Documents/Programming/Library/fujii/shell:$PATH
 
