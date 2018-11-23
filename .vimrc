@@ -15,8 +15,8 @@ Plug 'autozimu/LanguageClient-neovim', {
       \ 'branch': 'next',
       \ 'do': 'bash install.sh',
       \ }
-Plug 'junegunn/fzf'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'junegunn/fzf'
+Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neoinclude.vim'
@@ -31,14 +31,14 @@ call plug#end()
 
 source ~/Documents/Programming/Library/fujii/vim/commands.vim
 
-let mapleader=";"
 let g:NERDDefaultAlign='left'
 let g:neoinclude#paths = {'cpp': '/usr/local/Cellar/boost/1.68.0/include'}
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
   \ 'c': ['clangd'],
-  \ 'cpp': ['clangd']
+  \ 'cpp': ['clangd'],
+  \ 'python': ['/usr/local/bin/pyls'],
 \ }
 let g:LanguageClient_diagnosticsDisplay = {
   \ 1: {
@@ -67,7 +67,9 @@ let g:LanguageClient_diagnosticsDisplay = {
   \ },
 \ }
 
-let g:deoplete#enable_at_startup = 1
+let mapleader = "\<Space>"
+
+"let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_delay = 0
 let g:deoplete#auto_complete_start_length = 1
 let g:deoplete#enable_ignore_case = 1
@@ -77,23 +79,22 @@ let g:deoplete#file#enable_buffer_path = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
-nnoremap <C-]> :call LanguageClient_textDocument_formatting()<CR>
 nnoremap ; :
 nnoremap : ;
-nnoremap tp <Plug>AirlineSelectPrevTab
-nnoremap tn <Plug>AirlineSelectNextTab
-nnoremap <silent> <Esc><Esc> :noh<CR>
-nnoremap <silent> td :bd<CR>
-nnoremap  <C-o> :NERDTreeToggle<cr>
-nnoremap <silent> wh <C-w>h
-nnoremap <silent> wl <C-w>l
-nnoremap  cn :call LanguageClient#textDocument_rename()<CR>
+nnoremap <C-]> :call LanguageClient_textDocument_formatting()<CR>
+nnoremap <Leader>p :bprevious<CR>
+nnoremap <Leader>n :bnext<CR>
+nnoremap <Leader>d :bd<CR>
+nnoremap <Esc><Esc> :noh<CR>
+nnoremap <Leader>t :NERDTreeToggle<cr>
+nnoremap <Leader>cn :call LanguageClient#textDocument_rename()<CR>
 nnoremap <A-p> :pu<CR>
 nnoremap j gj
 nnoremap k gk
-nnoremap gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <Leader>gd :call LanguageClient_textDocument_definition()<CR>
 vnoremap c <nop>
 inoremap <silent> jj <ESC>
+inoremap <C-l> <C-g>U<Right>
 "Note: It must be "imap" and "smap".  It uses <Plug> mappings.
 imap <C-s> <Plug>(neosnippet_expand_or_jump)
 smap <C-s> <Plug>(neosnippet_expand_or_jump)

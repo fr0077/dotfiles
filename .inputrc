@@ -1,2 +1,4 @@
 set completion-ignore-case on
+TAB: menu-complete
+set visible-stats on
 

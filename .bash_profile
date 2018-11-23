@@ -1,3 +1,8 @@
+#bash
+export HISTCONTROL=erasedups
+export HISTIGNORE=?:??:???:????:pushd
+export TERM=xterm-256color
+
 if [ -f ~/.bashrc ]; then
   . ~/.bashrc
 fi

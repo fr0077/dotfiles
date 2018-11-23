@@ -6,6 +6,8 @@ alias g++="ccache g++"
 alias clang++="ccache clang++"
 alias vi="nvim"
 alias less="/usr/local/Cellar/neovim/0.3.1/share/nvim/runtime/macros/less.sh"
+alias tree="tree -NC"
+alias find="gfind"
+alias cdc="cd /Volume/ccj"
+alias dirs="dirs -v"
 
-set -o vi
-bind '"jj": vi-movement-mode'
