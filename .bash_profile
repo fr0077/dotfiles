@@ -26,14 +26,13 @@ if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 export PYENV_ROOT=/usr/local/var/pyenv
 
 #Git
-source git-completion
-source git-prompt
-git_ps1_showdirtystate=1
-git_ps1_showupstream=1
+source ~/Documents/Programming/Library/git/git-completion.sh
+source ~/Documents/Programming/Library/git/git-prompt.sh
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWUPSTREAM=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
 GIT_PS1_SHOWSTASHSTATE=1
-export PS1='\[\033[1;32m\]\u\[\033[00m\]:\[\033[1;34m\]\w\[\033[1;31m\]$(if [ $(id -u) -ne 0 ]; then echo  $(__g\
-it_ps1) ; fi)\[\033[00m\] \$ '
+export PS1='\[\033[1;32m\]\u\[\033[00m\]:\[\033[1;34m\]\w\[\033[1;31m\]$(if [ $(id -u) -ne 0 ]; then echo  $(__git_ps1) ; fi)\[\033[00m\] \$ '
 
 #Qt
 export PATH=$PATH:/usr/local/opt/qt5/bin
