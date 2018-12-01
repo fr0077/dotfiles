@@ -7,38 +7,29 @@ if [ -f ~/.bashrc ]; then
   . ~/.bashrc
 fi
 
-#boost
-export BOOST=/usr/local/Cellar/boost/1.68.0/include
-
-#Fujii
+#fujii
 export PATH=~/Documents/Programming/Library/fujii/shell:$PATH
 
 #NeoVim
 export EDITOR=/usr/local/bin/nvim
-
-#Emacs
-export PATH=/usr/local/cellar/emacs-mac/emacs-26.1-z-mac-7.1/bin:$PATH
-
-#GSL
-export GSL_I=/usr/local/Cellar/gsl/2.5/include
-export GSL_L=/usr/local/Cellar/gsl/2.5/lib
 
 #JAVA
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home
 export PATH=$PATH:$JAVA_HOME/bin
 
 #root
-export PATH=$PATH:/Applications/root_v6.08.02/bin
+export PATH=$PATH:/Applications/root_v6.14.06/bin
+export CPLUS_INCLUDE_PATH=/Applications/root_v6.14.06/include_compiler
 
 #Python
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 export PYENV_ROOT=/usr/local/var/pyenv
 
 #Git
-source $HOME/.git-completion.bash
-source $HOME/.git-prompt.sh
-GIT_PS1_SHOWDIRTYSTATE=1
-GIT_PS1_SHOWUPSTREAM=1
+source git-completion
+source git-prompt
+git_ps1_showdirtystate=1
+git_ps1_showupstream=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
 GIT_PS1_SHOWSTASHSTATE=1
 export PS1='\[\033[1;32m\]\u\[\033[00m\]:\[\033[1;34m\]\w\[\033[1;31m\]$(if [ $(id -u) -ne 0 ]; then echo  $(__g\

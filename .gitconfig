@@ -3,3 +3,5 @@
 [user]
 	name = ryohei
 	email = fr00777@hotmail.co.jp
+[core]
+	excludesfile = /Users/ryohei/.gitignore_global
