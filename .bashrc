@@ -1,5 +1,5 @@
 alias ls="ls -G"
-alias diff="colordiff"
+alias diff="colordiff -y"
 alias root="root -l"
 alias gcc="ccache gcc"
 alias clang="ccache clang"
@@ -12,6 +12,8 @@ alias find="gfind"
 alias dirs="dirs -v"
 alias mccj="source mccj"
 alias umccj="source umccj"
+alias make="gmake"
+alias bear="intercept-build"
 
 #set -o vi
 

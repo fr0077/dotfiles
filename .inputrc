@@ -1,4 +1,9 @@
 set completion-ignore-case on
+set show-all-if-ambiguous on
 TAB: menu-complete
 set visible-stats on
-
+set expand-tilde off
+set colored-stats on
+set bell-style none
+set visible-stats on
+set match-hidden-files on

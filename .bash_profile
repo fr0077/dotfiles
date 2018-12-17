@@ -2,13 +2,21 @@
 export HISTCONTROL=erasedups
 export HISTIGNORE=?:??:???:????:pushd
 export TERM=xterm-256color
+export FIGNORE=${FIGNORE}:Adlm:CMakeCache.txt:.gch:.bash_history:.bash_sessions
 
 if [ -f ~/.bashrc ]; then
   . ~/.bashrc
 fi
 
-#fujii
-export PATH=~/Documents/Programming/Library/fujii/shell:$PATH
+#z
+source ~/Documents/Programming/Library/shell/z/z.sh
+
+#Compiler
+export CXX=clang++
+export CC=clang
+
+#my_commands
+export PATH=~/Documents/Programming/Library/shell:$PATH
 
 #NeoVim
 export EDITOR=/usr/local/bin/nvim
@@ -26,8 +34,8 @@ if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 export PYENV_ROOT=/usr/local/var/pyenv
 
 #Git
-source ~/Documents/Programming/Library/git/git-completion.sh
-source ~/Documents/Programming/Library/git/git-prompt.sh
+source ~/Documents/Programming/Library/shell/git-completion.sh
+source ~/Documents/Programming/Library/shell/git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWUPSTREAM=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
@@ -45,3 +53,9 @@ source ~/Applications/geant4.10.04.p02-install/bin/geant4.sh
 
 #LLVM
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+
+#bash-completion
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
+fi
+
