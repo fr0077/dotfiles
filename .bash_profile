@@ -2,7 +2,7 @@
 export HISTCONTROL=erasedups
 export HISTIGNORE=?:??:???:????:pushd
 export TERM=xterm-256color
-export FIGNORE=${FIGNORE}:Adlm:CMakeCache.txt:.gch:.bash_history:.bash_sessions
+export FIGNORE="${FIGNORE}:Adlm:CMakeCache.txt:.gch:.bash_history:.bash_sessions"
 
 if [ -f ~/.bashrc ]; then
   . ~/.bashrc
