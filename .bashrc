@@ -17,6 +17,12 @@ alias bear="intercept-build"
 alias c="pbcopy"
 alias p="pbpaste"
 
+shopt -s autocd
+shopt -s cdspell
+shopt -s checkwinsize
+shopt -s dirspell
+shopt -s shift_verbose
+
 #peco
 export HISTCONTROL="ignoredups"
 peco-history() {
