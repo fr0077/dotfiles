@@ -1,19 +1,14 @@
 syntax on
 
 let mapleader = "\<Space>"
-source ~/Documents/Programming/Library/vim/commands.vim
 
 call plug#begin()
-"Plug 'Shougo/neoinclude.vim'
-Plug 'autozimu/LanguageClient-neovim'
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-"Plug 'prabirshrestha/vim-lsp'
-"Plug 'prabirshrestha/async.vim'
-"Plug 'prabirshrestha/asyncomplete.vim'
-"Plug 'prabirshrestha/asyncomplete-file.vim'
-"Plug 'prabirshrestha/asyncomplete-lsp.vim'
-"Plug 'kyouryuukunn/asyncomplete-neoinclude.vim'
+Plug 'autozimu/LanguageClient-neovim', {
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neoinclude.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -22,17 +17,49 @@ Plug 'scrooloose/nerdcommenter'
 call plug#end()
 
 "----------Plugin----------
-"LanguageClient-neovim
+""LanguageClient-neovim
 "let g:LanguageClient_serverCommands = {
 "      \ 'c': ['clangd'],
 "      \ 'cpp': ['clangd'],
 "      \ }
 let g:LanguageClient_serverCommands = {
-      \ 'c':['cquery', '--init={"cacheDirectory":"/tmp/cquery/cache"}'],
-      \ 'cpp':['cquery', '--init={"cacheDirectory":"/tmp/cquery/cache"}']
-      \}
+      \ 'c': ['cquery',
+      \ '--init={"cacheDirectory":"/tmp/cquery/"}'],
+      \ 'cpp': ['cquery',
+      \ '--init={"cacheDirectory":"/tmp/cquery/"}'],
+      \ }
+let g:LanguageClient_diagnosticsDisplay = {
+      \   1: {
+      \   "name": "Error",
+      \   "texthl": "ALEError",
+      \   "signText": "✘",
+      \   "signTexthl": "ALEErrorSign",
+      \   },
+      \   2: {
+      \   "name": "Warning",
+      \   "texthl": "ALEWarning",
+      \   "signText": "❖",
+      \   "signTexthl": "ALEWarningSign",
+      \   },
+      \   3: {
+      \   "name": "Information",
+      \   "texthl": "ALEInfo",
+      \   "signText": "ℹ",
+      \   "signTexthl": "ALEInfoSign",
+      \   },
+      \   4: {
+      \   "name": "Hint",
+      \   "texthl": "ALEInfo",
+      \   "signText": "♬",
+      \   "signTexthl": "ALEInfoSign",
+      \   },
+      \ }
+highlight ALEErrorSign ctermfg=red
+highlight ALEWarningSign ctermfg=yellow
+highlight ALEInfoSign ctermfg=blue
+
 nnoremap  <Leader>d :call LanguageClient#textDocument_definition()<CR>
-nnoremap  <Leader>r :call LanguageClient#textDocument_rename()<CR>
+"nnoremap  <Leader>r :call LanguageClient#textDocument_rename()<CR>
 nnoremap  <Leader>= :call LanguageClient#textDocument_formatting()<CR>
 
 ""vim-lsp
@@ -57,13 +84,20 @@ nnoremap  <Leader>= :call LanguageClient#textDocument_formatting()<CR>
 "let g:lsp_signs_warning = {'text': '❖'}
 "let g:lsp_signs_hint = {'text': '✒'}
 "let g:lsp_signs_information = {'text': 'ℹ'}
+"highlight LspErrorText ctermfg=red
+"highlight LspWarningText ctermfg=yellow
+"highlight LspHintText ctermfg=blue
+"highlight LspInformationText ctermfg=blue
 "nnoremap <Leader>r :LspRename<CR>
 "nnoremap <Leader>= :LspDocumentFormat<CR>
 "nnoremap <Leader>i :LspImplementation<CR>
 "nnoremap <Leader>d :LspDefinition<CR>
 
-"ncm2
-autocmd BufEnter * call ncm2#enable_for_buffer()
+"deoplete
+let g:deoplete#enable_at_startup = 1
+
+""ncm2
+"autocmd BufEnter * call ncm2#enable_for_buffer()
 
 ""asyncomplete
 "let g:asyncomplete_smart_completion = 1
@@ -95,13 +129,10 @@ let g:NERDDefaultAlign='left'
 nnoremap <Leader>t :NERDTreeToggle<CR>
 
 "----------Normal----------
-augroup cpp-path
-  autocmd!
-  autocmd FileType cpp setlocal path=/usr/local/opt/llvm/include/c++/v1,/usr/local/Cellar/boost/1.68.0/include,/usr/local/Cellar/gsl/2.5/include,/Applications/root_v6.14.06/include_compiler'
-augroup END
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\""
-endif
+command Color :so $VIMRUNTIME/syntax/colortest.vim
+command Setting :e ~/.dotfiles/init.vim
+autocmd FileType cpp setlocal path=/usr/local/opt/llvm/include/c++/v1,/usr/local/Cellar/boost/1.68.0/include,/usr/local/Cellar/gsl/2.5/include,/Applications/root_v6.14.06/include_compiler'
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\""
 autocmd BufEnter * silent! lcd %:p:h
 autocmd FileType help nnoremap <buffer> q <C-w>c
 autocmd FileType c,cpp setlocal foldmethod=syntax
@@ -128,8 +159,10 @@ vnoremap c <nop>
 inoremap <silent> jj <ESC><Right>
 noremap <C-l> <C-g>U<Right>
 noremap <C-h> <C-g>U<Left>
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+inoremap <c-c> <ESC>
 
 set gdefault
 set foldlevel=2
@@ -172,10 +205,6 @@ set scrolloff=5
 set ambiwidth=single
 
 highlight Folded ctermbg=none
-highlight LspErrorText ctermfg=red
-highlight LspWarningText ctermfg=yellow
-highlight LspHintText ctermfg=blue
-highlight LspInformationText ctermfg=blue
 highlight MatchParen ctermfg=white ctermbg=brown
 highlight SpellBad ctermfg=red cterm=underline ctermbg=none
 highlight SpecialKey ctermfg=darkgray
