@@ -25,10 +25,6 @@ export EDITOR=/usr/local/bin/nvim
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home
 export PATH=$PATH:$JAVA_HOME/bin
 
-#root
-export PATH=$PATH:/Applications/root_v6.14.06/bin
-export CPLUS_INCLUDE_PATH=/Applications/root_v6.14.06/include_compiler
-
 #Python
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 export PYENV_ROOT=/usr/local/var/pyenv

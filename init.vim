@@ -14,6 +14,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
+Plug 'osyo-manga/vim-anzu'
 call plug#end()
 
 "----------Plugin----------
@@ -24,9 +25,9 @@ call plug#end()
 "      \ }
 let g:LanguageClient_serverCommands = {
       \ 'c': ['cquery',
-      \ '--init={"cacheDirectory":"/tmp/cquery/"}'],
+      \ '--init={"cacheDirectory":"/tmp/cquery/cache"}'],
       \ 'cpp': ['cquery',
-      \ '--init={"cacheDirectory":"/tmp/cquery/"}'],
+      \ '--init={"cacheDirectory":"/tmp/cquery/cache"}'],
       \ }
 let g:LanguageClient_diagnosticsDisplay = {
       \   1: {
@@ -58,16 +59,16 @@ highlight ALEErrorSign ctermfg=red
 highlight ALEWarningSign ctermfg=yellow
 highlight ALEInfoSign ctermfg=blue
 
-nnoremap  <Leader>d :call LanguageClient#textDocument_definition()<CR>
-"nnoremap  <Leader>r :call LanguageClient#textDocument_rename()<CR>
-nnoremap  <Leader>= :call LanguageClient#textDocument_formatting()<CR>
+nnoremap <Leader>d :call LanguageClient#textDocument_definition()<CR>
+"nnoremap <Leader>r :call LanguageClient#textDocument_rename()<CR>
+nnoremap <Leader>= :call LanguageClient#textDocument_formatting()<CR>
 
 ""vim-lsp
 "if executable('clangd')
 "  autocmd User lsp_setup call lsp#register_server({
 "        \ 'name': 'clangd',
 "        \ 'cmd': {server_info->['clangd']},
-"        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+"        \ 'whitelist': ['c', 'cpp'],
 "        \ })
 "endif
 ""if executable('cquery')
@@ -128,10 +129,17 @@ let g:NERDToggleCheckAllLines = 1
 let g:NERDDefaultAlign='left'
 nnoremap <Leader>t :NERDTreeToggle<CR>
 
+"vim-anzu
+nmap <silent> n <Plug>(anzu-n-with-echo)
+nmap <silent> N <Plug>(anzu-N-with-echo)
+nmap <silent> * <Plug>(anzu-star-with-echo)
+nmap <silent> # <Plug>(anzu-sharp-with-echo)
+nnoremap <silent> <Esc><Esc> :noh<CR> <bar> <Plug>(anzu-clear-search-status)
+set statusline=%{anzu#search_status()}
+
 "----------Normal----------
 command Color :so $VIMRUNTIME/syntax/colortest.vim
 command Setting :e ~/.dotfiles/init.vim
-autocmd FileType cpp setlocal path=/usr/local/opt/llvm/include/c++/v1,/usr/local/Cellar/boost/1.68.0/include,/usr/local/Cellar/gsl/2.5/include,/Applications/root_v6.14.06/include_compiler'
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\""
 autocmd BufEnter * silent! lcd %:p:h
 autocmd FileType help nnoremap <buffer> q <C-w>c
@@ -149,7 +157,6 @@ function! IndentWithI()
   endif
 endfunction
 nnoremap <expr> i IndentWithI()
-nnoremap <Esc><Esc> :noh<CR>
 nnoremap <A-p> :pu<CR>
 nnoremap j gj
 nnoremap k gk
