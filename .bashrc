@@ -1,4 +1,4 @@
-alias ls="ls -G"
+alias ls="ls -Gh"
 alias diff="colordiff -y"
 alias root="root -l"
 alias gcc="ccache gcc"
@@ -25,6 +25,7 @@ shopt -s cdspell
 shopt -s checkwinsize
 shopt -s dirspell
 shopt -s shift_verbose
+set -b
 
 #fzf
 FZF_OPTIONS="--height 40% --reverse --border"
