@@ -7,7 +7,7 @@ alias g++="ccache g++"
 alias clang++="ccache clang++"
 alias vi="nvim"
 alias view="nvim -R"
-alias less="/usr/local/Cellar/neovim/0.3.1/share/nvim/runtime/macros/less.sh"
+alias less="/usr/local/Cellar/neovim/0.3.1/share/nvim/runtime/macros/less.sh -u ~/.config/nvim/init-less.vim"
 alias tree="tree -NC"
 alias find="gfind"
 alias dirs="dirs -v"
@@ -27,10 +27,9 @@ shopt -s dirspell
 shopt -s shift_verbose
 
 #fzf
-export HISTCONTROL="ignoredups"
 FZF_OPTIONS="--height 40% --reverse --border"
 fzf-history() {
-  local line=$(history | cut -c 7- | fzf $FZF_OPTIONS)
+  local line=$(history | cut -c 8- | fzf $FZF_OPTIONS)
   if [[ -n $line ]]; then
     READLINE_LINE="$line"
     READLINE_POINT=${#READLINE_LINE}
@@ -42,7 +41,7 @@ function fzf-z()
 {
   local res=$(z | cut -c 12- | fzf $FZF_OPTIONS)
   if [[ -n $res ]]; then
-    READLINE_LINE="cd $res"
+    READLINE_LINE+="$res"
     READLINE_POINT=${#READLINE_LINE}
   else
     return 1
