@@ -9,7 +9,7 @@ if [ -f ~/.bashrc ]; then
 fi
 
 #z
-source ~/Documents/Programming/Library/shell/z/z.sh
+source /usr/local/etc/profile.d/z.sh
 
 #Compiler
 export CXX=clang++

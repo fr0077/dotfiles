@@ -17,8 +17,10 @@ alias make="gmake"
 alias bear="intercept-build"
 alias c="pbcopy"
 alias p="pbpaste"
-alias python="python3"
 alias top="top -o cpu"
+alias gdb="gdb -q"
+alias pi="python"
+alias pi3="python3"
 
 shopt -s autocd
 shopt -s cdspell
