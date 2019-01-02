@@ -1,6 +1,7 @@
 #login
-fortune | lolcat
-fill -s '. '
+fill -s '-  '
+fortune
+fill -s '-  '
 echo
 
 #alias
