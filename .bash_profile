@@ -1,13 +1,3 @@
-#bash
-export HISTCONTROL=erasedups
-export HISTIGNORE=?:??:???:????:pushd
-export TERM=xterm-256color
-export FIGNORE="${FIGNORE}:Adlm:CMakeCache.txt:.gch:.bash_history:.bash_sessions"
-
-if [ -f ~/.bashrc ]; then
-  . ~/.bashrc
-fi
-
 #z
 source /usr/local/etc/profile.d/z.sh
 
@@ -51,7 +41,10 @@ source ~/Applications/geant4.10.04.p02-install/bin/geant4.sh
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 
 #bash-completion
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
-fi
+source /usr/local/share/bash-completion/bash_completion
+
+#bash
+export HISTCONTROL=erasedups
+export TERM=xterm-256color
+source ~/.bashrc
 

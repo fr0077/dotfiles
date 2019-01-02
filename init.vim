@@ -28,6 +28,8 @@ let g:LanguageClient_serverCommands = {
       \ '--init={"cacheDirectory":"/tmp/cquery/cache"}'],
       \ 'cpp': ['cquery',
       \ '--init={"cacheDirectory":"/tmp/cquery/cache"}'],
+      \ 'sh': ['bash-language-server', 'start'],
+      \ 'python': ['pyls'],
       \ }
 let g:LanguageClient_diagnosticsDisplay = {
       \   1: {
@@ -147,8 +149,6 @@ autocmd FileType c,cpp setlocal foldmethod=syntax
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 nnoremap Y y$
-nnoremap ; :
-nnoremap : ;
 function! IndentWithI()
   if len(getline('.')) == 0
     return "cc"

@@ -1,27 +1,26 @@
+#login
+fortune | lolcat
+fill -s '. '
+echo
+
+#alias
 alias ls="ls -Gh"
 alias diff="colordiff -y"
 alias root="root -l"
-alias gcc="ccache gcc"
-alias clang="ccache clang"
-alias g++="ccache g++"
-alias clang++="ccache clang++"
 alias vi="nvim"
 alias view="nvim -R"
-alias less="/usr/local/Cellar/neovim/0.3.1/share/nvim/runtime/macros/less.sh -u ~/.config/nvim/init-less.vim"
+alias less="/usr/local/Cellar/neovim/0.3.2/share/nvim/runtime/macros/less.sh -u ~/.config/nvim/init-less.vim"
 alias tree="tree -NC"
-alias find="gfind"
 alias dirs="dirs -v"
 alias mccj="source mccj"
 alias umccj="source umccj"
-alias make="gmake"
 alias bear="intercept-build"
 alias c="pbcopy"
 alias p="pbpaste"
 alias top="top -o cpu"
 alias gdb="gdb -q"
-alias pi="python"
-alias pi3="python3"
 
+#setting
 shopt -s autocd
 shopt -s cdspell
 shopt -s checkwinsize
@@ -30,9 +29,9 @@ shopt -s shift_verbose
 set -b
 
 #fzf
-FZF_OPTIONS="--height 40% --reverse --border"
+FZF_OPTIONS="--height 40% --border --reverse"
 fzf-history() {
-  local line=$(history | cut -c 8- | fzf $FZF_OPTIONS)
+  local line=$(history | cut -c 8- | gtac|  fzf $FZF_OPTIONS)
   if [[ -n $line ]]; then
     READLINE_LINE="$line"
     READLINE_POINT=${#READLINE_LINE}
@@ -42,7 +41,7 @@ bind -x '"\C-r":fzf-history'
 
 function fzf-z()
 {
-  local res=$(z | cut -c 12- | fzf $FZF_OPTIONS)
+  local res=$(z | cut -c 12- | gtac| fzf $FZF_OPTIONS)
   if [[ -n $res ]]; then
     READLINE_LINE+="$res"
     READLINE_POINT=${#READLINE_LINE}
@@ -52,4 +51,5 @@ function fzf-z()
 }
 bind -x '"\C-f":fzf-z'
 
+#thefuck
 eval $(thefuck --alias)
