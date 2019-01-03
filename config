@@ -1,0 +1,13 @@
+ServerAliveInterval 60
+
+Host ccjgw
+  HostName ccjgw.riken.jp
+  User fujii
+  IdentityFile ~/.ssh/kek
+
+Host ccj
+  HostName ccjphi03
+  User fujii
+  IdentityFile ~/.ssh/kek
+  ProxyCommand ssh ccjgw -W %h:%p
+
