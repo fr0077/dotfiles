@@ -22,6 +22,7 @@ export PYENV_ROOT=/usr/local/var/pyenv
 #Git
 source ~/Documents/Programming/Library/shell/git-completion.sh
 source ~/Documents/Programming/Library/shell/git-prompt.sh
+export PATH=/usr/local/Cellar/git/2.20.1/bin:$PATH
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWUPSTREAM=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
@@ -31,14 +32,12 @@ export PS1='\[\033[1;32m\]\u\[\033[00m\]:\[\033[1;34m\]\w\[\033[1;31m\]$(if [ $(
 #Qt
 export PATH=$PATH:/usr/local/opt/qt5/bin
 
-#GEANT4
-export G4INSTALL=~/Applications/geant4.10.04.p02
-export G4SYSTEM=Darwin-clang
-export DGeant4_DIR=~/Applications/geant4.10.04.p02-install/lib/Geant4-10.4.2
-source ~/Applications/geant4.10.04.p02-install/bin/geant4.sh
-
 #LLVM
-export PATH="/usr/local/opt/llvm/bin:$PATH"
+
+#LLDB
+#Required to use system python
+export PATH="/usr/bin:$PATH"
+export PYTHONPATH=$PYTHONPATH:$(lldb -P)
 
 #bash-completion
 source /usr/local/share/bash-completion/bash_completion
@@ -46,5 +45,6 @@ source /usr/local/share/bash-completion/bash_completion
 #bash
 export HISTCONTROL=erasedups
 export TERM=xterm-256color
+export PATH="/usr/local/sbin:$PATH"
 source ~/.bashrc
 

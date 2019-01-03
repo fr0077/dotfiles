@@ -2,6 +2,8 @@ syntax on
 
 let mapleader = "\<Space>"
 
+let g:python_host_prog = expand('/usr/bin/python')
+let g:python3_host_prog = expand('/usr/local/bin/python3')
 call plug#begin()
 Plug 'autozimu/LanguageClient-neovim', {
       \ 'branch': 'next',
@@ -15,14 +17,11 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
 Plug 'osyo-manga/vim-anzu'
+Plug 'dbgx/lldb.nvim'
 call plug#end()
 
 "----------Plugin----------
 ""LanguageClient-neovim
-"let g:LanguageClient_serverCommands = {
-"      \ 'c': ['clangd'],
-"      \ 'cpp': ['clangd'],
-"      \ }
 let g:LanguageClient_serverCommands = {
       \ 'c': ['cquery',
       \ '--init={"cacheDirectory":"/tmp/cquery/cache"}'],
@@ -60,64 +59,16 @@ let g:LanguageClient_diagnosticsDisplay = {
 highlight ALEErrorSign ctermfg=red
 highlight ALEWarningSign ctermfg=yellow
 highlight ALEInfoSign ctermfg=blue
-
 nnoremap <Leader>d :call LanguageClient#textDocument_definition()<CR>
 "nnoremap <Leader>r :call LanguageClient#textDocument_rename()<CR>
 nnoremap <Leader>= :call LanguageClient#textDocument_formatting()<CR>
 
-""vim-lsp
-"if executable('clangd')
-"  autocmd User lsp_setup call lsp#register_server({
-"        \ 'name': 'clangd',
-"        \ 'cmd': {server_info->['clangd']},
-"        \ 'whitelist': ['c', 'cpp'],
-"        \ })
-"endif
-""if executable('cquery')
-""  autocmd User lsp_setup call lsp#register_server({
-""        \ 'name': 'cquery',
-""        \ 'cmd': {server_info->['cquery']},
-""        \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery/cache' },
-""        \ 'whitelist': ['c', 'cpp']
-""        \ })
-""endif
-"let g:lsp_signs_enabled = 1
-"let g:lsp_diagnostics_echo_cursor = 1
-"let g:lsp_signs_error= {'text': '✘'}
-"let g:lsp_signs_warning = {'text': '❖'}
-"let g:lsp_signs_hint = {'text': '✒'}
-"let g:lsp_signs_information = {'text': 'ℹ'}
-"highlight LspErrorText ctermfg=red
-"highlight LspWarningText ctermfg=yellow
-"highlight LspHintText ctermfg=blue
-"highlight LspInformationText ctermfg=blue
-"nnoremap <Leader>r :LspRename<CR>
-"nnoremap <Leader>= :LspDocumentFormat<CR>
-"nnoremap <Leader>i :LspImplementation<CR>
-"nnoremap <Leader>d :LspDefinition<CR>
-
 "deoplete
 let g:deoplete#enable_at_startup = 1
 
-""ncm2
-"autocmd BufEnter * call ncm2#enable_for_buffer()
-
-""asyncomplete
-"let g:asyncomplete_smart_completion = 1
-"let g:asyncomplete_auto_popup = 1
-"let g:asyncomplete_remove_duplicates = 1
-""autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#neoinclude#get_source_options({
-""      \ 'name': 'neoinclude',
-""      \ 'whitelist': ['c', 'cpp'],
-""      \ 'refresh_pattern': '\(<\|"\|/\)$',
-""      \ 'completor': function('asyncomplete#sources#neoinclude#completor'),
-""      \ }))
-""autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-""      \ 'name': 'file',
-""      \ 'whitelist': ['*'],
-""      \ 'priority': 10,
-""      \ 'completor': function('asyncomplete#sources#file#completor')
-""      \ }))
+"lldb
+let g:lldb#sign#bp_symbol='●'
+highlight LLBreakpointSign ctermfg=red
 
 "NERDCommenter
 nmap <Leader>c <Plug>NERDCommenterToggle
@@ -213,10 +164,9 @@ set ambiwidth=single
 
 highlight Folded ctermbg=none
 highlight MatchParen ctermfg=white ctermbg=brown
-highlight SpellBad ctermfg=red cterm=underline ctermbg=none
 highlight SpecialKey ctermfg=darkgray
 highlight NonText ctermfg=darkgray
-highlight CursorLine cterm=none ctermfg=none ctermbg=none
+highlight CursorLine cterm=none ctermfg=none ctermbg=black
 highlight CursorColumn cterm=none ctermfg=none ctermbg=black
 highlight Cursor cterm=none ctermfg=white ctermbg=green
 highlight CursorLineNr cterm=none ctermfg=green ctermbg=none
