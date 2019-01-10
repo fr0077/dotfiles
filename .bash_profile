@@ -8,6 +8,9 @@ export CC=clang
 #my_commands
 export PATH=~/Documents/Programming/Library/shell:$PATH
 
+#Homebrew
+export HOMEBREW_INSTALL_CLEANUP=1
+
 #NeoVim
 export EDITOR=/usr/local/bin/nvim
 
