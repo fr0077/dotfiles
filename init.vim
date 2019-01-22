@@ -29,6 +29,8 @@ let g:LanguageClient_serverCommands = {
       \ '--init={"cacheDirectory":"/tmp/cquery/cache"}'],
       \ 'sh': ['bash-language-server', 'start'],
       \ 'python': ['pyls'],
+      \ 'haskell': ['hie-wrapper'],
+      \ 'javascript': ["~/Documents/Programming/node/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js"],
       \ }
 let g:LanguageClient_diagnosticsDisplay = {
       \   1: {

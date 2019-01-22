@@ -5,6 +5,9 @@ source /usr/local/etc/profile.d/z.sh
 export CXX=clang++
 export CC=clang
 
+#Haskell
+export PATH=~/.local/bin:$PATH
+
 #my_commands
 export PATH=~/Documents/Programming/Library/shell:$PATH
 
