@@ -9,7 +9,8 @@ export CC=clang
 export PATH=~/.local/bin:$PATH
 
 #my_commands
-export PATH=~/Documents/Programming/Library/shell:$PATH
+LIBPATH=~/OneDrive/share/documents/programming/Library/shell
+export PATH=$LIBPATH:$PATH
 
 #Homebrew
 export HOMEBREW_INSTALL_CLEANUP=1
@@ -26,8 +27,8 @@ if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 export PYENV_ROOT=/usr/local/var/pyenv
 
 #Git
-source ~/Documents/Programming/Library/shell/git-completion.sh
-source ~/Documents/Programming/Library/shell/git-prompt.sh
+source "$LIBPATH"/git-completion.sh
+source "$LIBPATH"/git-prompt.sh
 export PATH=/usr/local/Cellar/git/2.20.1/bin:$PATH
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWUPSTREAM=1
@@ -42,7 +43,7 @@ export PATH=$PATH:/usr/local/opt/qt5/bin
 
 #LLDB
 #Required to use system python
-export PATH="/usr/bin:$PATH"
+export PATH=/usr/bin:$PATH
 export PYTHONPATH=$PYTHONPATH:$(lldb -P)
 
 #bash-completion
