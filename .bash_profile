@@ -9,7 +9,7 @@ export CC=clang
 export PATH=~/.local/bin:$PATH
 
 #my_commands
-LIBPATH=~/OneDrive/share/documents/programming/Library/shell
+LIBPATH=~/documents/programming/Library/shell
 export PATH=$LIBPATH:$PATH
 
 #Homebrew

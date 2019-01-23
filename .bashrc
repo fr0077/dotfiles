@@ -16,10 +16,12 @@ alias dirs="dirs -v"
 alias mccj="source mccj"
 alias umccj="source umccj"
 alias bear="intercept-build"
-alias c="pbcopy"
-alias p="pbpaste"
 alias top="top -o cpu"
 alias gdb="gdb -q"
+
+alias clip="wget -rpkNE -np -l 3"
+alias c="pbcopy"
+alias p="pbpaste"
 
 #setting
 shopt -s autocd
