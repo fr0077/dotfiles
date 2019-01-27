@@ -52,7 +52,7 @@ function fzf-z()
     return 1
   fi
 }
-bind -x '"\C-f":fzf-z'
+bind -x '"\C-p":fzf-z'
 
 #thefuck
 eval $(thefuck --alias)

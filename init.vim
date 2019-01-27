@@ -18,6 +18,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
 Plug 'osyo-manga/vim-anzu'
 Plug 'dbgx/lldb.nvim'
+Plug 'posva/vim-vue'
 call plug#end()
 
 "----------Plugin----------
@@ -64,6 +65,9 @@ highlight ALEInfoSign ctermfg=blue
 nnoremap <Leader>d :call LanguageClient#textDocument_definition()<CR>
 "nnoremap <Leader>r :call LanguageClient#textDocument_rename()<CR>
 nnoremap <Leader>= :call LanguageClient#textDocument_formatting()<CR>
+
+"vum-vue
+autocmd FileType vue syntax sync fromstart
 
 "deoplete
 let g:deoplete#enable_at_startup = 1
@@ -116,7 +120,6 @@ nnoremap k gk
 nnoremap <Leader>f za
 nnoremap Q <Nop>
 vnoremap c <nop>
-inoremap <silent> jj <ESC><Right>
 noremap <C-l> <C-g>U<Right>
 noremap <C-h> <C-g>U<Left>
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")

@@ -2,8 +2,9 @@
 source /usr/local/etc/profile.d/z.sh
 
 #Compiler
-export CXX=clang++
-export CC=clang
+export CXX="ccache clang++"
+export CC="ccache clang"
+export USE_CCACHE=1
 
 #Haskell
 export PATH=~/.local/bin:$PATH
